@@ -1,0 +1,17 @@
+class EnjoyFeedbackCreateContactMessages < ActiveRecord::Migration
+  def change
+    create_table :enjoy_feedback_contact_messages do |t|
+      t.string :name
+      t.string :email
+      t.string :phone
+      t.text :content
+      <% Enjoy::Feedback.config.fields.each_pair do |name, type| %>
+      t.<%= type %> :<%= name %>
+      <% end %>
+      t.timestamps
+    end
+
+    add_index :enjoy_feedback_contact_messages, :created_at
+    add_index :enjoy_feedback_contact_messages, :updated_at
+  end
+end

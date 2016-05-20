@@ -1,0 +1,22 @@
+ru:
+  enjoy:
+    feedback: Обратная связь
+
+  mongoid: &mongoid
+    models:
+      enjoy/feedback/contact_message: Сообщение
+    attributes:
+      enjoy/feedback/contact_message:
+        name: Ваше имя
+        email: Ваш е-мейл
+        phone: Ваш телефон
+        content: Ваше сообщение
+
+    errors:
+      models:
+        enjoy/feedback/contact_message:
+          attributes:
+            email:
+              invalid_email_address: "^Неверный e-mail"
+  activerecord:
+    <<: *mongoid
