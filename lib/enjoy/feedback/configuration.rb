@@ -20,6 +20,8 @@ module Enjoy::Feedback
 
     attr_accessor :recreate_contact_message_action
 
+    attr_accessor :breadcrumbs_on_rails_support
+
     def initialize
       @captcha = false
       @fields = {}
@@ -29,6 +31,8 @@ module Enjoy::Feedback
       @no_contact_info_error_message = "Пожалуйста введите Ваш e-mail или телефон, чтобы мы могли связаться с вами."
 
       @recreate_contact_message_action = "new"
+
+      @breadcrumbs_on_rails_support = defined?(BreadcrumbsOnRails)
     end
   end
 end

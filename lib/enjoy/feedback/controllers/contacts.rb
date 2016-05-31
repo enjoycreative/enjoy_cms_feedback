@@ -2,6 +2,13 @@ module Enjoy::Feedback
   module Controllers
     module Contacts
       extend ActiveSupport::Concern
+
+      included do
+        if Enjoy::Feedback.config.breadcrumbs_on_rails_support
+          add_breadcrumb I18n.t('enjoy.breadcrumbs.contacts'), :enjoy_feedback_contacts_path
+        end
+      end
+
       def index
         @contact_message = model.new
         after_initialize

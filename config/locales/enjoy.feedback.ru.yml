@@ -1,6 +1,9 @@
 ru:
   enjoy:
     feedback: Обратная связь
+    breadcrumbs:
+      feedback: Обратная связь
+      contacts: Контакты
 
   mongoid: &mongoid
     models:
