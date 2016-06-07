@@ -22,6 +22,8 @@ module Enjoy::Feedback
 
     attr_accessor :breadcrumbs_on_rails_support
 
+    attr_accessor :recaptcha_support
+
     def initialize
       @captcha = false
       @fields = {}
@@ -33,6 +35,8 @@ module Enjoy::Feedback
       @recreate_contact_message_action = "new"
 
       @breadcrumbs_on_rails_support = defined?(BreadcrumbsOnRails)
+
+      @recaptcha_support = defined?(Recaptcha)
     end
   end
 end

@@ -25,11 +25,18 @@ module Enjoy::Feedback
         @contact_message = model.new(message_params)
         after_initialize
         if Enjoy::Feedback.config.captcha
-          meth = :save_with_captcha
+          if Enjoy::Feedback.config.recaptcha_support
+            recaptcha_res = verify_recaptcha
+            meth = :save
+          else
+            recaptcha_res = true
+            meth = :save_with_captcha
+          end
         else
+          recaptcha_res = true
           meth = :save
         end
-        if @contact_message.send(meth)
+        if recaptcha_res and @contact_message.send(meth)
           after_create
           if request.xhr? && process_ajax
             ajax_success
@@ -85,7 +92,7 @@ module Enjoy::Feedback
       end
       def message_params
         params.require(model.to_param.gsub("::", "").underscore).permit(
-          Enjoy::Feedback.config.contacts_fields.keys + [:name, :email, :phone, :content, :captcha, :captcha_key]
+          Enjoy::Feedback.config.fields.keys + [:name, :email, :phone, :content, :captcha, :captcha_key]
         )
       end
     end
