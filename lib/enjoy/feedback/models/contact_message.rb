@@ -7,8 +7,10 @@ module Enjoy::Feedback
       include Enjoy::Feedback.orm_specific('ContactMessage')
 
       included do
-        include SimpleCaptcha::ModelHelpers
-        apply_simple_captcha message: Enjoy::Feedback.configuration.captcha_error_message
+        if Enjoy::Feedback.config.simple_captcha_support
+          include SimpleCaptcha::ModelHelpers
+          apply_simple_captcha message: Enjoy::Feedback.configuration.captcha_error_message
+        end
 
         validates_email_format_of :email, unless: 'email.blank?'
         if Enjoy::Feedback.config.message_required

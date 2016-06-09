@@ -23,6 +23,7 @@ module Enjoy::Feedback
     attr_accessor :breadcrumbs_on_rails_support
 
     attr_accessor :recaptcha_support
+    attr_accessor :simple_captcha_support
 
     def initialize
       @captcha = false
@@ -37,6 +38,7 @@ module Enjoy::Feedback
       @breadcrumbs_on_rails_support = defined?(BreadcrumbsOnRails)
 
       @recaptcha_support = defined?(Recaptcha)
+      @simple_captcha_support = defined?(SimpleCaptcha)
     end
   end
 end

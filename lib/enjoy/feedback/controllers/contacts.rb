@@ -26,17 +26,21 @@ module Enjoy::Feedback
         after_initialize
         if Enjoy::Feedback.config.captcha
           if Enjoy::Feedback.config.recaptcha_support
-            recaptcha_res = verify_recaptcha
-            meth = :save
+            if verify_recaptcha
+              meth = :save
+            else
+              meth = :valid?
+              @recaptcha_error = I18n.t('enjoy.errors.feedback.recaptcha')
+            end
+
           else
-            recaptcha_res = true
             meth = :save_with_captcha
           end
         else
-          recaptcha_res = true
           meth = :save
         end
-        if recaptcha_res and @contact_message.send(meth)
+
+        if @contact_message.send(meth)
           after_create
           if request.xhr? && process_ajax
             ajax_success

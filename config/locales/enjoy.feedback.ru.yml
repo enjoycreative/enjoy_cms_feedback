@@ -4,6 +4,9 @@ ru:
     breadcrumbs:
       feedback: Обратная связь
       contacts: Контакты
+    errors:
+      feedback:
+        recaptcha: Вы робот?
 
   mongoid: &mongoid
     models:

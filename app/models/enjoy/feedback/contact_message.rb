@@ -5,6 +5,7 @@ module Enjoy::Feedback
   end
 
   class ContactMessage
+
     include Enjoy::Feedback::Models::ContactMessage
 
     include Enjoy::Feedback::Decorators::ContactMessage
