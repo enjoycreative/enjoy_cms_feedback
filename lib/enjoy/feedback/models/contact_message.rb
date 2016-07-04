@@ -23,7 +23,7 @@ module Enjoy::Feedback
         end
 
         after_create do
-          mailer_class.send(mailer_method, self).deliver if send_emails?
+          mailer_class.send(mailer_method, self).deliver_now if send_emails?
         end
       end
 

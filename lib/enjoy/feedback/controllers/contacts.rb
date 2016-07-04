@@ -24,6 +24,7 @@ module Enjoy::Feedback
       def create
         @contact_message = model.new(message_params)
         after_initialize
+
         if Enjoy::Feedback.config.captcha
           if Enjoy::Feedback.config.recaptcha_support
             if verify_recaptcha
@@ -33,8 +34,11 @@ module Enjoy::Feedback
               @recaptcha_error = I18n.t('enjoy.errors.feedback.recaptcha')
             end
 
-          else
+          elsif Enjoy::Feedback.config.simple_captcha_support
             meth = :save_with_captcha
+
+          else
+            meth = :save
           end
         else
           meth = :save
